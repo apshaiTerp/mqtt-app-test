@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>org.ac.bluemix</groupId>
+  <artifactId>mqtt-app-test</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>MQTT Java Application Test Project</name>
+  <description>This project just wants to send MQTT messages into that great big IoT Broker in the sky</description>
+  <inceptionYear>2015</inceptionYear>
+  
+  <developers>
+    <developer>
+      <id>apshaiTerp</id>
+      <name>Adam Carter</name>
+      <email>apshaiTerp@yahoo.com</email>
+      <roles>
+        <role>owner</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+  
+  <!--
+  <scm>
+    <connection>scm:git:git@github.com/apshaiTerp/ac-games-agent.git</connection>
+    <developerConnection>scm:git:git@github.com/apshaiTerp/ac-games-agent.git</developerConnection>
+    <url>http://github.com/apshaiTerp/ac-games-agent</url>
+    <tag>HEAD</tag>
+  </scm>
+  -->
+
+  <properties>
+    <!--  Depedency Versions  -->
+    <paho.version>1.0.2</paho.version>
+    <json.version>20140107</json.version>
+    <junit.version>4.11</junit.version>
+
+    <!--  Plugin Versions  -->
+    <compiler.plugin.version>3.1</compiler.plugin.version>
+    <assembly.plugin.version>2.5.3</assembly.plugin.version>
+    <javadoc.plugin.version>2.9.1</javadoc.plugin.version>
+    <source.plugin.version>2.2.1</source.plugin.version>
+    <reports.plugin.version>2.7</reports.plugin.version>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+        <groupId>org.eclipse.paho</groupId>
+        <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+        <version>${paho.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>${json.version}</version>
+    </dependency>
+    <!-- Test Dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${compiler.plugin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${assembly.plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>org.ac.bluemix.SimpleApplication</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.plugin.version}</version>
+        <configuration>
+          <charset>UTF-8</charset>
+          <detectLinks>true</detectLinks>
+          <docencoding>UTF-8</docencoding>
+          <docfilessubdirs>true</docfilessubdirs>
+          <source>1.7</source>
+        </configuration>
+        <executions>
+          <execution>
+	          <id>attach-javadocs</id>
+	          <goals>
+	            <goal>jar</goal>
+	            <goal>test-jar</goal>
+	          </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+              <goal>test-jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>maven</id>
+      <name>Central Maven Repo</name>
+      <url>http://repo1.maven.org/maven2</url>
+    </repository>   
+    <repository>
+      <id>Eclipse Paho Repo</id>
+      <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+    </repository>  
+  </repositories>
+  <pluginRepositories>
+      <pluginRepository>
+          <id>spring-releases</id>
+          <url>http://repo.spring.io/libs-release</url>
+      </pluginRepository>
+  </pluginRepositories>
+  
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${reports.plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.plugin.version}</version>
+        <configuration>
+          <charset>UTF-8</charset>
+          <detectLinks>true</detectLinks>
+          <docencoding>UTF-8</docencoding>
+          <docfilessubdirs>true</docfilessubdirs>
+          <source>1.6</source>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>
